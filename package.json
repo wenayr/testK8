@@ -1,0 +1,10 @@
+{
+  "name": "mini-task-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "pnpmApprove": "pnpm approve-builds",
+    "pnpmInstall": "pnpm install -r",
+    "pnpmInstallAll": "pnpm install -r || (pnpm approve-builds && pnpm install -r)"
+  }
+}
