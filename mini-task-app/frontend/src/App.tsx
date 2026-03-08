@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './App.css';
 
 interface Task {
   id: number;
@@ -72,121 +73,45 @@ const App: React.FC = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>TODO App</h1>
+    <div className="container">
+      <h1>TODO App</h1>
 
-      {error && <div style={styles.error}>Ошибка: {error}</div>}
+      {error && <div className="error">Ошибка: {error}</div>}
 
-      <form onSubmit={addTask} style={styles.form}>
+      <form onSubmit={addTask} className="task-form">
         <input
           type="text"
           value={newTaskTitle}
           onChange={(e) => setNewTaskTitle(e.target.value)}
           placeholder="Введите новую задачу..."
-          style={styles.input}
         />
-        <button type="submit" style={styles.button}>
+        <button type="submit">
           Добавить
         </button>
       </form>
 
       {loading ? (
-        <p>Загрузка...</p>
+        <p className="loading">Загрузка...</p>
       ) : (
-        <ul style={styles.list}>
+        <div className="task-list">
           {tasks.map(task => (
-            <li key={task.id} style={styles.listItem}>
+            <div key={task.id} className={`task-item ${task.completed ? 'completed' : ''}`}>
               <input
                 type="checkbox"
                 checked={task.completed}
                 onChange={(e) => toggleTask(task.id, e.target.checked)}
-                style={styles.checkbox}
               />
-              <span style={{
-                ...styles.taskTitle,
-                textDecoration: task.completed ? 'line-through' : 'none',
-                color: task.completed ? '#888' : '#000'
-              }}>
-                {task.title}
-              </span>
-            </li>
+              <span>{task.title}</span>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
 
       {tasks.length === 0 && !loading && (
-        <p style={styles.emptyMessage}>Нет задач. Добавьте первую!</p>
+        <p className="empty-state">Нет задач. Добавьте первую!</p>
       )}
     </div>
   );
-};
-
-const styles = {
-  container: {
-    maxWidth: '600px',
-    margin: '0 auto',
-    padding: '20px',
-    fontFamily: 'Arial, sans-serif'
-  },
-  title: {
-    textAlign: 'center' as const,
-    color: '#333'
-  },
-  error: {
-    padding: '10px',
-    marginBottom: '10px',
-    backgroundColor: '#fee',
-    border: '1px solid #fcc',
-    borderRadius: '4px',
-    color: '#c00'
-  },
-  form: {
-    display: 'flex',
-    marginBottom: '20px'
-  },
-  input: {
-    flex: 1,
-    padding: '10px',
-    fontSize: '16px',
-    border: '1px solid #ddd',
-    borderRadius: '4px 0 0 4px'
-  },
-  button: {
-    padding: '10px 20px',
-    fontSize: '16px',
-    backgroundColor: '#007bff',
-    color: 'white',
-    border: 'none',
-    borderRadius: '0 4px 4px 0',
-    cursor: 'pointer'
-  },
-  list: {
-    listStyle: 'none',
-    padding: 0
-  },
-  listItem: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '10px',
-    marginBottom: '8px',
-    backgroundColor: '#f9f9f9',
-    border: '1px solid #ddd',
-    borderRadius: '4px'
-  },
-  checkbox: {
-    marginRight: '10px',
-    cursor: 'pointer',
-    width: '18px',
-    height: '18px'
-  },
-  taskTitle: {
-    fontSize: '16px'
-  },
-  emptyMessage: {
-    textAlign: 'center' as const,
-    color: '#888',
-    fontStyle: 'italic' as const
-  }
 };
 
 export default App;
