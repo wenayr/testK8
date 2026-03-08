@@ -11,10 +11,6 @@ COPY . .
 # Устанавливаем пакеты из lockfile
 RUN pnpm install --frozen-lockfile
 
-
-# Это тут написано чтобы проерить процесс установки
-RUN ls -la /app/backend/node_modules/.bin/ts-node-dev
-
 EXPOSE 3001
 
 WORKDIR /app/backend

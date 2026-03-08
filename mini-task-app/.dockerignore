@@ -1,0 +1,38 @@
+# === Зависимости ===
+     # Игнорируем node_modules на любом уровне вложенности (и в корне, и в микросервисах)
+     **/node_modules/
+     # Служебные файлы pnpm
+     **/.pnpm-store/
+     .pnpm-workspace-state*
+     .modules.yaml
+
+     # === Настройки окружения и секреты ===
+     # Игнорируем любые файлы с ключами и паролями (.env, .env.local и т.д.)
+     **/.env*
+
+     # === Git-файлы ===
+     # Игнорируем папку .git и файлы вроде .gitignore
+     **/.git*
+
+     # === Настройки IDE и редакторов ===
+     **/.idea/
+     **/.vscode/
+     **/.DS_Store
+
+     # === Сборки и кэши (если они собираются уже внутри контейнера) ===
+     **/dist/
+     **/build/
+     **/out/
+     **/.vite/
+     **/.tscache/
+
+     # === Логи ===
+     npm-debug.log*
+     yarn-debug.log*
+     yarn-error.log*
+     pnpm-debug.log*
+
+     # === Docker-файлы (опционально) ===
+     # Сам Dockerfile и docker-compose в итоговом образе не нужны
+     **/Dockerfile*
+     docker-compose.yml
